@@ -18,7 +18,8 @@ function inflateMe(e) {
   let inflate = e.target
   let location = inflate.src
   let source = location.slice(-13)
-
+  let position = array.e.target
+  console.log(position)
   // console.log(unicornArray)
   if (source == 'unicorn-0.png') {
     inflate.src = './images/unicorn-1.png'
