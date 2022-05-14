@@ -7,38 +7,26 @@ console.log('Dress The Clown!')
 const head = document.getElementById('head')
 const body = document.getElementById('body')
 const shoes = document.getElementById('shoes')
+// this indicates to the head body or shoe position
 let clothingIndex = 0
 
-//creating a universal clothing changer
+//creating a universal clothing changer, this number changes based on the events listed below
 
 let clothingItem = 0
-// having these as strings causes src location to come up as undefined, this needs to be an array of the constants defined above.
-const bodyPartArray = ['head', 'body', 'shoes']
-const bodyPartsArray = [head, body, shoes]
-// let headIndex = 0
-// let bodyIndex = 0
-// let shoeIndex = 0
-// let clownHead = document.getElementsByClassName('dress-an-image head')
-// clownHead.id = 'head'
-// let clownBody = document.getElementsByClassName('dress-an-image body')
-// clownBody.id = 'body'
-// let clownShoes = document.getElementsByClassName('dress-an-image shoes')
-// clownShoes.id = 'shoes'
-// console.log(clownHead)
-// console.log(clownBody)
-// console.log(clownShoes)
 
-// for some reason this is not working - what i am expecting to get is bodypart array position 0 1 2 are equal to head body shoes. so therefore bodypartarray[clothingIndex] should return the value of clothingIndex ie 1 therefore body...
-let part = bodyPartArray[clothingIndex]
-let parts = bodyPartsArray[clothingIndex]
-console.log(part)
-// create a universal clothingItem changer. this might not let the item remain
+// having these as strings causes src location to come up as undefined, this needs to be an array of the constants defined above.
+// solved by creating two different arrays, one of strings for changing the source the other of variables containing the location of the element we need to manipulate.
+const bodyPartArray = ['head', 'shoes', 'body']
+const bodyPartsArray = [head, shoes, body]
+
 function changer() {
+  let part = bodyPartArray[clothingIndex]
+  let parts = bodyPartsArray[clothingIndex]
   parts.src = './images/' + part + clothingItem + '.png'
 }
-console.log(parts.src)
+
 //console.log(part.src)
-// // create a function that can manipulate the image source
+// // create a function that can manipulate the image source. this was replaced with a generic changer function listed above.
 // function changeClownHead() {
 //   head.src = './images/head' + headIndex + '.png'
 
@@ -61,8 +49,9 @@ document.addEventListener('keydown', function (e) {
 
       break
     case 38: //up
-      if (clothingIndex == 2) (clothingIndex = 0), changer()
-      else clothingIndex++, changer(), console.log(clothingIndex)
+      if (clothingIndex == 2) clothingIndex = 0
+      //, changer()
+      else clothingIndex++ //, changer()
       break
     case 39: //left
       if (clothingItem == 5) (clothingItem = 0), changer()
@@ -70,34 +59,12 @@ document.addEventListener('keydown', function (e) {
 
       break
     case 40: // down
-      if (clothingIndex >= 0) (clothingIndex = 2), changer()
-      else clothingIndex--, changer()
+      if (clothingIndex == 0) clothingIndex = 2
+      //, changer()
+      else clothingIndex-- //, changer()
       break
   }
 })
 
-// changeClownHead()
-// document.addEventListener('keydown', function (e) {
-//   switch (e.keyCode) {
-//     case 37: //right
-//       if (headIndex == 0 && clothingIndex == 0)
-//         (headIndex = 5), changeClownHead()
-//       else headIndex--, changeClownHead()
-
-//       break
-//     case 38: //up
-//       // if (clothingIndex == 2) clothingIndex = 0
-//       // else clothingIndex++
-//       break
-//     case 39: //left
-//       if (headIndex == 5 && clothingIndex == 0)
-//         (headIndex = 0), changeClownHead()
-//       else headIndex++, changeClownHead()
-
-//       break
-//     case 40: // down
-//       // if (clothingIndex == 0) clothingIndex = 2
-//       // else clothingIndex--
-//       break
-//   }
-// })
+// some improvements could be that when flicking back to the different source locations we could slice the current location so we could re orient our clothing position. currently when the index number is changed it takes with it the index of the other clothing item, so when we start cycling through the clothes it starts from a new item of clothing not in the natural order of what was expected to come next...
+// bodypart array and bodyparts array could be a single array, for some reason i cant turn the variable into a string when referenced by index position. so my work around was to create a secondary array of strings, cheeky!
